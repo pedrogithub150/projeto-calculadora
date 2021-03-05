@@ -27,7 +27,7 @@ pipeline {
      
         stage('envia a imagem para o Nexus') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'pedrosj', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'envio-imagensDocker-para-Nexus', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh 'docker login -u "$USERNAME" -p "$PASSWORD" localhost:8082'
                 sh 'docker tag "$DOCKER_IMAGE":v1.0 localhost:8082/"$DOCKER_IMAGE":v1.0'
                 sh 'docker push localhost:8082/"$DOCKER_IMAGE":v1.0'
@@ -38,7 +38,7 @@ pipeline {
 
            stage("envia o artefacto para o Nexus") {
             steps{
-                withCredentials([usernameColonPassword(credentialsId: 'pedrosj', variable: 'USERPASS')]) {
+                withCredentials([usernameColonPassword(credentialsId: 'envios-repositorioNexus', variable: 'USERPASS')]) {
                 sh 'curl -v -u "$USERPASS" --upload-file /var/jenkins_home/workspace/projeto-calculadora/"$JAR_NAME".jar http://localhost:8081/repository/raw-repository/'
             }
         }
