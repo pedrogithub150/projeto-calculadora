@@ -39,7 +39,7 @@ pipeline {
            stage("envia o artefacto para o Nexus") {
             steps{
                 withCredentials([usernameColonPassword(credentialsId: 'envios-repositorioNexus', variable: 'USERPASS')]) {
-                sh 'curl -v -u "$USER":"$PASS" --upload-file /var/jenkins_home/workspace/projeto-calculadora/"$JAR_NAME".jar http://localhost:8081/repository/raw-repository/'
+                sh 'curl -v -u "$USER":"$PASS" --upload-file /var/jenkins_home/workspace/projeto-calculadora/"$JAR_NAME".jar http://nexus:8081/repository/raw-repository/'
         
             }
         }
