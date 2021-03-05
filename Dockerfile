@@ -1,3 +1,4 @@
 FROM openjdk:16-jdk-alpine
-COPY target/*.jar /app/app.jar
-ENTRYPOINT ["java","-jar","/app/tarefaCalculadora.jar"]
+WORKDIR /apt/java/appjava
+ADD tarefaCalculadora.jar app.jar
+CMD ["/usr/bin/java", "-jar", "app.jar"]
