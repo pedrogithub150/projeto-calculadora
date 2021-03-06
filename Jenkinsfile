@@ -17,6 +17,16 @@ pipeline {
             }
         }
 
+
+        stage("análise do sonarqube") {
+
+            steps {
+                script {
+                    sonarScanner('category-service')
+                }
+            }
+        }      
+
     
         stage('cria a imagem docker') {
             steps {
